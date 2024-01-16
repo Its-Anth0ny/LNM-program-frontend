@@ -1,0 +1,137 @@
+/* dashboard.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+  
+  .App {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  
+  .header-container {
+    background-color: #f3f2ed;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .header-container h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #000000;
+  }
+  
+  .main-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .left-column {
+    flex: 1;
+    padding: 10px;
+  }
+  
+  .search-filter {
+    margin-bottom: 10px;
+  }
+  
+  .search-filter input {
+    padding: 5px;
+    margin-right: 10px;
+  }
+  
+  .center-column {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  
+  .center-column button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .center-column button:hover {
+    background-color: #0056b3;
+  }
+  
+  .right-column {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+  }
+  
+  /* Styling for Program List */
+  .program-list-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #4cbaf5;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+  
+  .program-list-item:hover {
+    background-color: #2982b2;
+  }
+  
+  /* Styling for Program Details */
+  .program-details {
+    background-color: #f6f0e0;
+    padding: 10px;
+  }
+  
+  /* Styling for Program Form */
+  .program-form-container {
+    margin: 20px auto; /* Center the form horizontally */
+    max-width: 600px; /* Set the maximum width of the form */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow-y: auto; /* Enable vertical scrolling for the form */
+  }
+  
+  .program-form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .program-form-container input,
+  .program-form-container textarea,
+  .program-form-container select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .program-form-container button {
+    padding: 10px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .program-form-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .program-form-container input[disabled] {
+    background-color: #eee;
+    cursor: not-allowed;
+  }
+  
