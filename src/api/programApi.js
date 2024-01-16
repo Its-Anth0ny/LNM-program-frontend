@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000'; // Replace with your backend URL
+const BASE_URL = 'https://hero-backend-knh4.onrender.com'; // Replace with your backend URL
 
 const programApi = {
   // Fetch all programs from the backend
