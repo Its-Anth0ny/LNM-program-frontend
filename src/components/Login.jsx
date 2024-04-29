@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useUserContext } from '../UserContext';
-import './login.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../UserContext";
+import "../utils/App.css";
+// import SignupModal from "./SignupModal";
 
-const Login = () => {
+const Login = ({ handleCloseLogin, handleAuth }) => {
+    // const [isSignupOpen, setIsSignupOpen] = useState(false);
+    // const handleOpenSignup = () => setIsSignupOpen(true);
+    // const handleCloseSignup = () => setIsSignupOpen(false);
     const [formData, setFormData] = useState({
-        email: '',
-        password: '',
+        email: "",
+        password: "",
     });
 
     const { login } = useUserContext();
@@ -23,24 +27,30 @@ const Login = () => {
         event.preventDefault();
 
         try {
-            const response = await fetch('https://hero-backend-knh4.onrender.com/api/users/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+            const response = await fetch(
+                "http://localhost:3000/api/users/login",
+                {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                }
+            );
 
-            if (response.status === 201) {
+            if (response.ok) {
                 const userData = await response.json();
                 login(userData.username);
-
-                navigate('/program');
+                handleCloseLogin();
+                handleAuth();
+                navigate("/program");
             } else {
-                console.error('Login failed');
+                alert("Login failed");
+                console.error("Login failed");
             }
         } catch (error) {
-            console.error('Error during login:', error);
+            console.error("Error during login:", error);
         }
     };
 
@@ -48,7 +58,7 @@ const Login = () => {
         <div className="custom-container">
             <div className="custom-content">
                 <form className="custom-form" onSubmit={handleSubmit}>
-                <div className="welcome-text">LOGIN HERE</div>
+                    <div className="welcome-text">LOGIN HERE</div>
                     <label className="custom-label" htmlFor="email">
                         Email:
                     </label>
@@ -78,11 +88,22 @@ const Login = () => {
                     <button className="custom-button" type="submit">
                         Log In
                     </button>
-
-                    <p className="custom-paragraph">
-                        Don't have an account? <Link to="/signup">Sign Up</Link>
-                    </p>
                 </form>
+                {/* <p className="custom-paragraph">
+                    Don't have an account?
+                    <button
+                        className="signup-link-btn"
+                        onClick={() => {
+                            handleOpenSignup();
+                        }}
+                    >
+                        Signup
+                    </button>
+                    <SignupModal
+                        isSignupOpen={isSignupOpen}
+                        handleCloseSignup={handleCloseSignup}
+                    />
+                </p> */}
             </div>
         </div>
     );

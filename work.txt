@@ -1,0 +1,3 @@
+shad cn install
+nav bar
+tables

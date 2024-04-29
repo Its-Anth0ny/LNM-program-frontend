@@ -1,14 +1,13 @@
-// signup.js
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../utils/App.css";
 
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './signup.css';  // Make sure to include the correct CSS file
-
-const Signup = () => {
+const Signup = ({ handleCloseSignup }) => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        password: '',
+        username: "",
+        email: "",
+        password: "",
     });
 
     const handleChange = (e) => {
@@ -21,25 +20,36 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://hero-backend-knh4.onrender.com/api/users/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
-            if (response.ok) {
+            const response = await fetch(
+                "http://localhost:3000/api/users/signup",
+                {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(formData),
+                }
+            );
+
+            if (response.status === 409) {
+                // Signup failed due to conflict (e.g., duplicate email or username)
+                const errorData = await response.json();
+                alert(errorData.error); // Assuming the error message is provided in the "error" field of the response
+                console.error("Signup failed:", errorData.error);
+            } else if (response.ok) {
                 // Successful signup
-                console.log('Signup successful!');
-                // Redirect to login page
-                window.location.href = '/login';
+                console.log("Signup successful!");
+                // close the signup modal
+                handleCloseSignup();
+                navigate("/program");
             } else {
-                // Failed signup
-                console.error('Signup failed:', response.statusText);
-                // TODO: Handle errors appropriately, e.g., display an error message to the user.
+                // Other signup errors
+                console.error("Signup failed:", response.statusText);
+                // TODO: Handle other errors appropriately, e.g., display an error message to the user.
             }
         } catch (error) {
-            console.error('Error:', error.message);
+            console.error("Signup failed:", error.message);
             // TODO: Handle errors appropriately, e.g., display an error message to the user.
         }
     };
@@ -68,7 +78,6 @@ const Signup = () => {
                     <input
                         className="custom-input"
                         type="email"
-                        id="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
@@ -91,11 +100,23 @@ const Signup = () => {
                     <button className="custom-button" type="submit">
                         Sign Up
                     </button>
-
-                    <p className="custom-paragraph">
-                        Already have an account? <Link to="/login">Login</Link>
-                    </p>
                 </form>
+
+                {/* <p className="custom-paragraph">
+                    Already have an account?{" "}
+                    <button
+                        onClick={() => {
+                            handleOpenLogin();
+                            handleCloseSignup();
+                        }}
+                    >
+                        Login
+                    </button>
+                    <LoginModal
+                        isLoginOpen={isLoginOpen}
+                        handleCloseLogin={handleCloseLogin}
+                    />
+                </p> */}
             </div>
         </div>
     );

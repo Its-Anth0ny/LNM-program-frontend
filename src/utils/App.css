@@ -1,0 +1,179 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+body{
+  width: 100%;
+  height: 100%;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* header  */
+
+.header-container{
+  background-color: #2081c2;
+  padding: 15px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-logo>h3>a{
+  text-decoration: none;
+  color:#ffffff;
+}
+.nav-container{
+  /* margin-right: 20px; */
+}
+.nav-container>ul>li>a{
+  text-decoration: none;
+}
+.nav-container>ul{
+  list-style-type: none;
+  display: flex;
+}
+
+.nav-container>ul>li{
+  padding: 8px ;
+  margin: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.login-btn, .signup-btn{
+  background-color: #ceebff;
+  color: #0d4971;
+}
+.login-btn:hover, .signup-btn:hover{
+  /* text-decoration: none; */
+  background-color: #a3d6fb;
+}
+.logout-btn{
+  background-color: #ffb0a2;
+  color: #691313;
+}
+.logout-btn:hover{
+  /* text-decoration: none; */
+  background-color: #ff816b;
+}
+
+
+/* home */
+
+
+.homepage{
+  height: 100vh;
+  /* padding: 10px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(./360\ VIEW\ OF\ LNMIIT.jpg);
+  background-size: cover;
+  background-position: center;
+}
+.lnm-logo-container{
+  width: 10rem;
+}
+.welcome{
+  color: #ddf1ff;
+}
+
+
+/* Login-page */
+
+
+.overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.signup-modal{
+  position: fixed;
+  /* top: 150px;
+  left: 550px;
+  right: 550px;
+  bottom: 150px; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #ffffff;
+  border-radius: 3px;
+  text-align: center;
+  box-sizing: border-box;
+
+  padding: 30px;
+}
+.login-modal{
+  position: fixed;
+  /* top: 21vh;
+  left: 38vw;
+  right: 38vw;
+  bottom: 26vh; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #ffffff;
+  border-radius: 3px;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+
+.welcome-text {
+  color: #3498db;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.custom-form {
+  box-sizing: border-box;
+}
+
+.custom-label {
+  display: block;
+  margin-bottom: 12px;
+  color: #555555;
+}
+
+.custom-input {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  color: #555555;
+}
+
+.custom-button {
+  background-color: #2196f3;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+  background-color: #0b7dda;
+}
+
+.custom-paragraph {
+  margin-top: 20px;
+  color: #555555;
+  font-size: 14px;
+  margin-bottom: 0;
+}
