@@ -1,20 +1,16 @@
-import "../utils/App.css";
-// import logo from "../utils/1587710975_LNMIIT.jpg";
-// import bgImg from "../utils/360 VIEW OF LNMIIT.jpg";
-// import { Link } from "react-router-dom";
-
 const Welcome = () => {
     return (
-        <div className="flex h-[calc(100vh-72px)]">
-            <div className="flex-1"></div>
-            <ul className="text-[80px] flex flex-col items-start justify-center gap-8 pr-8">
-                <li className="">Navigate your</li>
+        <div className="grid grid-cols-12 h-[calc(100vh-72px)] px-14 gap-4">
+            <ul className="text-[5vw] font-semibold flex flex-col items-start justify-center col-span-7">
+                <li className="">Navigate Your</li>
                 <li className="">Academic Journey</li>
-                <li className="">with Ease</li>
+                <li className="text-[5vw] flex gap-4">
+                    With <p className="text-red-500">EASE</p>
+                </li>
             </ul>
-            {/* <div>
-                <Link to={LNMURL}>About</Link>
-            </div> */}
+            <div className="flex items-center justify-center col-span-5">
+                <img src="/welcome2.png" alt="" className="max-w-full" />
+            </div>
         </div>
     );
 };

@@ -4,39 +4,34 @@ import { UserContextProvider } from "./UserContext";
 import Header from "./components/Header";
 import Welcome from "./pages/Welcome";
 import Footer from "./components/Footer";
+import { ThemeProvider } from "./components/theme-provider";
 
 function App() {
     return (
-        <UserContextProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <div className="p-0 m-0 font-poppins">
-                                <Header />
-                                <Outlet />
-                                <Footer />
-                            </div>
-                        }
-                    >
-                        <Route path="/" element={<Welcome />} />
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <UserContextProvider>
+                <BrowserRouter>
+                    <Routes>
                         <Route
-                            path="/program"
-                            element={<ProgramsDashboardContainer />}
-                        />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
-        </UserContextProvider>
-    );
-}
-
-function ProgramsDashboardContainer() {
-    return (
-        <div className="App">
-            <ProgramsDashboard />
-        </div>
+                            path="/"
+                            element={
+                                <div className="p-0 m-0 font-poppins unshow-scroll">
+                                    <Header />
+                                    <Outlet />
+                                    <Footer />
+                                </div>
+                            }
+                        >
+                            <Route path="/" element={<Welcome />} />
+                            <Route
+                                path="/program"
+                                element={<ProgramsDashboard />}
+                            />
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </UserContextProvider>
+        </ThemeProvider>
     );
 }
 

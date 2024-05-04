@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-import { SheetDemo } from "./Sheet";
+import AuthModal from "../modals/AuthModal";
+import { Button } from "./ui/button";
+// import { SheetDemo } from "./Sheet";
 
 const Header = () => {
     const navigate = useNavigate();
+
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+    const handleAuthModal = () => setIsAuthModalOpen(!isAuthModalOpen);
 
     const [isAuth, setIsAuth] = useState(false);
     const handleAuth = () => setIsAuth(true);
@@ -24,23 +28,44 @@ const Header = () => {
     };
 
     return (
-        <nav className="sticky top-0 backdrop-blur-lg">
+        <nav className="sticky top-0 bg-gray-600 bg-opacity-25 backdrop-blur-lg">
             <div className="flex items-center justify-between w-full px-4 py-4 mx-auto sm:px-6 lg:px-8">
                 <div className="flex-shrink-0">
-                    <h3 className="text-xl">
+                    <h3 className="text-xl font-semibold">
                         <Link to="/">LNM-Program-Dashboard</Link>
                     </h3>
                 </div>
                 <div className="flex space-x-4">
                     {isAuth ? (
-                        <button
-                            className="text-white hover:text-gray-300"
-                            onClick={handleLogout}
-                        >
-                            Logout
-                        </button>
+                        <div className="space-x-4">
+                            <Button onClick={() => navigate("/program")}>
+                                Dashboard
+                            </Button>
+                            <Button onClick={handleLogout}>Logout</Button>
+                        </div>
                     ) : (
-                        <SheetDemo handleAuth={handleAuth} />
+                        <div>
+                            {/* <SheetDemo
+                                isAuthModalOpen={isAuthModalOpen}
+                                handleAuthModal={handleAuthModal}
+                                isAuth={isAuth}
+                                handleAuth={handleAuth}
+                            /> */}
+                            <div className="flex gap-4 max-md:hidden">
+                                <Button className="" onClick={handleAuthModal}>
+                                    Login/Signup
+                                </Button>
+                                <Button className="max-md:hidden">
+                                    Contact Us
+                                </Button>
+                            </div>
+                            <AuthModal
+                                isAuthModalOpen={isAuthModalOpen}
+                                handleAuthModal={handleAuthModal}
+                                isAuth={isAuth}
+                                handleAuth={handleAuth}
+                            />
+                        </div>
                     )}
                 </div>
             </div>

@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../utils/App.css";
+import { Button } from "./ui/button";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "./ui/card";
 
-const Signup = ({ handleCloseSignup }) => {
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { useUserContext } from "../UserContext";
+
+const Signup = ({ handleAuthModal, handleAuth }) => {
     const navigate = useNavigate();
+    const { login } = useUserContext();
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -35,16 +48,17 @@ const Signup = ({ handleCloseSignup }) => {
             if (response.status === 409) {
                 // Signup failed due to conflict (e.g., duplicate email or username)
                 const errorData = await response.json();
-                alert(errorData.error); // Assuming the error message is provided in the "error" field of the response
+                alert(errorData.error);
                 console.error("Signup failed:", errorData.error);
             } else if (response.ok) {
-                // Successful signup
                 console.log("Signup successful!");
-                // close the signup modal
-                handleCloseSignup();
+                const userData = await response.json();
+                // close the auth modal
+                login(userData.username);
+                handleAuthModal();
+                handleAuth();
                 navigate("/program");
             } else {
-                // Other signup errors
                 console.error("Signup failed:", response.statusText);
                 // TODO: Handle other errors appropriately, e.g., display an error message to the user.
             }
@@ -55,8 +69,59 @@ const Signup = ({ handleCloseSignup }) => {
     };
 
     return (
-        <div className="custom-container">
-            <div className="custom-content">
+        <div className="">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Signup</CardTitle>
+                    <CardDescription>
+                        If you don't have an account, register here
+                    </CardDescription>
+                </CardHeader>
+
+                <CardContent className="space-y-2">
+                    <div className="space-y-1">
+                        <Label htmlFor="username">Username</Label>
+                        <Input
+                            id="username"
+                            type="text"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            placeholder="Enter username"
+                            required
+                        />
+                    </div>
+                    <div className="space-y-1">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Enter email id"
+                            required
+                        />
+                    </div>
+                    <div className="space-y-1">
+                        <Label htmlFor="password">Password</Label>
+                        <Input
+                            id="password"
+                            type="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            placeholder="Enter password"
+                            minLenght={8}
+                            required
+                        />
+                    </div>
+                </CardContent>
+                <CardFooter>
+                    <Button onClick={handleSubmit}>Signup</Button>
+                </CardFooter>
+            </Card>
+            {/* <div className="custom-content">
                 <form className="custom-form" onSubmit={handleSubmit}>
                     <div className="welcome-text">SIGNUP HERE</div>
                     <label className="custom-label" htmlFor="username">
@@ -102,7 +167,7 @@ const Signup = ({ handleCloseSignup }) => {
                     </button>
                 </form>
 
-                {/* <p className="custom-paragraph">
+                <p className="custom-paragraph">
                     Already have an account?{" "}
                     <button
                         onClick={() => {
@@ -116,8 +181,8 @@ const Signup = ({ handleCloseSignup }) => {
                         isLoginOpen={isLoginOpen}
                         handleCloseLogin={handleCloseLogin}
                     />
-                </p> */}
-            </div>
+                </p>
+            </div> */}
         </div>
     );
 };

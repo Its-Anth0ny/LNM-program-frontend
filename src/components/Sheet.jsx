@@ -1,40 +1,33 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
 import {
     Sheet,
     SheetClose,
     SheetContent,
-    SheetDescription,
+    // SheetDescription,
     SheetFooter,
     SheetHeader,
-    SheetTitle,
+    // SheetTitle,
     SheetTrigger,
 } from "./ui/sheet";
-import LoginModal from "../modals/LoginModal";
-import SignupModal from "../modals/SignupModal";
 
-export function SheetDemo(handleAuth) {
-    const [isSignupOpen, setIsSignupOpen] = useState(false);
-    const handleOpenSignup = () => setIsSignupOpen(true);
-    const handleCloseSignup = () => setIsSignupOpen(false);
-
-    const [isLoginOpen, setIsLoginOpen] = useState(false);
-    const handleOpenLogin = () => setIsLoginOpen(true);
-    const handleCloseLogin = () => setIsLoginOpen(false);
-
+export function SheetDemo(props) {
+    const { isAuth, handleAuth, handleAuthModal } = props;
     return (
         <div>
-            <Sheet>
+            <Sheet className="">
                 <SheetTrigger asChild>
-                    <Button>
-                        <Menu />
-                    </Button>
+                    <div>
+                        <Button className="dark:bg-transparent md:hidden">
+                            <Menu className="dark:text-white" />
+                        </Button>
+                    </div>
                 </SheetTrigger>
-                <SheetContent className="text-white border-none bg-grey-800">
+                <SheetContent className="text-white border-none">
                     <SheetHeader> Welcome </SheetHeader>
                     <button
-                        className="text-white hover:text-gray-300"
+                        className="text-white hover:text-gray-300 "
                         onClick={() => {
                             <SheetClose />;
                             handleOpenLogin();
@@ -55,15 +48,6 @@ export function SheetDemo(handleAuth) {
                     <SheetFooter> </SheetFooter>
                 </SheetContent>
             </Sheet>
-            <LoginModal
-                isLoginOpen={isLoginOpen}
-                handleCloseLogin={handleCloseLogin}
-                handleAuth={handleAuth}
-            />
-            <SignupModal
-                isSignupOpen={isSignupOpen}
-                handleCloseSignup={handleCloseSignup}
-            />
         </div>
     );
 }

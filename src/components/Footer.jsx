@@ -6,7 +6,9 @@ import {
     Twitter,
     Linkedin,
     Instagram,
+    Github,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
@@ -20,22 +22,24 @@ const Footer = () => {
                         </h3>
                         <ul>
                             <li className="flex items-center mb-2">
-                                <Mail />
-                                <a
-                                    href="mailto:info@example.com"
-                                    className="hover:text-gray-300"
+                                <Link
+                                    to="mailto:shubhankarbhatt27@gmail.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex gap-2"
                                 >
-                                    info@example.com
-                                </a>
+                                    <Mail />
+                                    shubhankarbhatt27@gmail.com
+                                </Link>
                             </li>
-                            <li className="flex items-center mb-2">
+                            {/* <li className="flex items-center mb-2">
                                 <Phone />
                                 <span>+1 (123) 456-7890</span>
                             </li>
                             <li className="flex items-center">
                                 <MapPin />
                                 <span>1234 Elm Street, City, Country</span>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
 
@@ -54,11 +58,11 @@ const Footer = () => {
                                     About Us
                                 </a>
                             </li>
-                            <li className="mb-2">
+                            {/* <li className="mb-2">
                                 <a href="#" className="hover:text-gray-300">
                                     Services
                                 </a>
-                            </li>
+                            </li> */}
                             <li className="mb-2">
                                 <a href="#" className="hover:text-gray-300">
                                     Contact Us
@@ -73,28 +77,31 @@ const Footer = () => {
                         </h3>
                         <ul className="flex space-x-4">
                             <li>
-                                <a
-                                    href="#"
-                                    className="text-gray-400 hover:text-gray-300"
+                                <Link
+                                    to="https://twitter.com/BhattShubhankar"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     <Twitter />
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    className="text-gray-400 hover:text-gray-300"
+                                <Link
+                                    to="https://www.linkedin.com/in/bhattshubhankar/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
                                     <Linkedin />
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
-                                    href="#"
-                                    className="text-gray-400 hover:text-gray-300"
+                                <Link
+                                    to="https://github.com/Its-Anth0ny"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                 >
-                                    <Instagram />
-                                </a>
+                                    <Github />
+                                </Link>
                             </li>
                         </ul>
                     </div>
