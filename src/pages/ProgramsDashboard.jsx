@@ -14,6 +14,18 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../components/ui/select";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "../components/ui/dialog";
+import { Button } from "../components/ui/button";
+import { Label } from "../components/ui/label";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 const ProgramsDashboard = () => {
     const [programs, setPrograms] = useState([]);
@@ -22,7 +34,6 @@ const ProgramsDashboard = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedDomain, setSelectedDomain] = useState("");
     const [availableDomains, setAvailableDomains] = useState([]);
-    const [isFormVisible, setIsFormVisible] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const { user } = useUserContext();
 
@@ -65,7 +76,6 @@ const ProgramsDashboard = () => {
                 ...new Set(updatedPrograms.map((program) => program.domain)),
             ];
             setAvailableDomains(domains);
-            setIsFormVisible(false);
         } catch (error) {
             console.error("Error creating program:", error);
         }
@@ -84,7 +94,6 @@ const ProgramsDashboard = () => {
                     ),
                 ];
                 setAvailableDomains(domains);
-                setIsFormVisible(false);
             } else {
                 console.log("Not allowed to update program");
             }
@@ -96,7 +105,6 @@ const ProgramsDashboard = () => {
     const handleEdit = (program) => {
         setSelectedProgram(program);
         setIsEditing(true);
-        setIsFormVisible(true);
     };
 
     const handleDeleteProgram = async (programData) => {
@@ -111,7 +119,6 @@ const ProgramsDashboard = () => {
                     ),
                 ];
                 setAvailableDomains(domains);
-                setIsFormVisible(false);
             } else {
                 console.log("Not allowed to delete program");
             }
@@ -125,7 +132,6 @@ const ProgramsDashboard = () => {
     };
 
     const handleToggleForm = () => {
-        setIsFormVisible(!isFormVisible);
         setSelectedProgram(null);
     };
 
@@ -162,25 +168,52 @@ const ProgramsDashboard = () => {
                 </div>
             </div>
             <div className="row-span-10">
-                <button onClick={handleToggleForm}>
-                    {isFormVisible ? "Hide Form" : "Add Program"}
-                </button>
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button variant="outline" onClick={handleToggleForm}>
+                            Add Program
+                        </Button>
+                    </DialogTrigger>
+                    {isEditing ? (
+                        <DialogContent className="max-w-[425px] w-full max-h-[calc(100vh-100px)] h-full overflow-hidden">
+                            <DialogHeader>
+                                <DialogTitle className="text-2xl">
+                                    Form
+                                </DialogTitle>
+                                <DialogDescription>
+                                    Add the program details below.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <ProgramForm
+                                program={selectedProgram}
+                                onCreateProgram={handleCreateProgram}
+                                onUpdateProgram={handleUpdateProgram}
+                                onDeleteProgram={handleDeleteProgram}
+                                availableDomains={availableDomains}
+                                ownerUsername={user?.username}
+                                isEditMode={isEditing}
+                            />
+                        </DialogContent>
+                    ) : (
+                        <DialogContent className="max-w-[425px] w-full max-h-[calc(100vh-100px)] h-full overflow-hidden">
+                            <DialogHeader>
+                                <DialogTitle className="text-2xl">
+                                    Program Details
+                                </DialogTitle>
+                                <DialogDescription></DialogDescription>
+                            </DialogHeader>
+
+                            <ProgramDetails
+                                program={selectedProgram}
+                                onEdit={handleEdit}
+                            />
+                        </DialogContent>
+                    )}
+                </Dialog>
                 <ProgramList
                     programs={filteredPrograms}
                     onSelectProgram={handleSelectProgram}
                 />
-                {isFormVisible && (
-                    <ProgramForm
-                        program={selectedProgram}
-                        onCreateProgram={handleCreateProgram}
-                        onUpdateProgram={handleUpdateProgram}
-                        onDeleteProgram={handleDeleteProgram}
-                        availableDomains={availableDomains}
-                        ownerUsername={user?.username}
-                        isEditMode={isEditing}
-                    />
-                )}
-                <ProgramDetails program={selectedProgram} onEdit={handleEdit} />
             </div>
         </div>
     );

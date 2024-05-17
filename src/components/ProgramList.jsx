@@ -1,4 +1,13 @@
-import React from "react";
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableFooter,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "./ui/table";
 
 const ProgramList = ({ programs, onSelectProgram }) => {
     return (
@@ -8,7 +17,7 @@ const ProgramList = ({ programs, onSelectProgram }) => {
                 programs.map((program) => (
                     <div
                         key={program.id}
-                        className="program-list-item"
+                        className=""
                         onClick={() => onSelectProgram(program)}
                     >
                         <h3>{program.name}</h3>
@@ -18,7 +27,6 @@ const ProgramList = ({ programs, onSelectProgram }) => {
                         <p>
                             <strong>Price:</strong> INR {program.price}
                         </p>
-                        {/* Add other program details as needed */}
                     </div>
                 ))
             ) : (

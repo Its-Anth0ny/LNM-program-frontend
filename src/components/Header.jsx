@@ -24,7 +24,7 @@ const Header = () => {
         }
         navigate("/");
         setIsAuth(false);
-        // window.location.reload();
+        window.location.reload();
     };
 
     return (
