@@ -43,12 +43,12 @@ const ProgramForm = ({
         }
     };
 
-    const handleUpdate = () => {
-        handleSave();
-    };
+    // const handleUpdate = () => {
+    //     handleSave();
+    // };
 
     return (
-        <ScrollArea className="w-full h-full scrollbar-hidden">
+        <ScrollArea className="w-full h-full">
             <div className="w-full pl-2 pr-6 space-y-2">
                 <Label>Program Name:</Label>
                 <Input
@@ -242,7 +242,7 @@ const ProgramForm = ({
                     <Button onClick={handleSave}>Save</Button>
                     <Button onClick={handleDelete}>Delete</Button>
                     {formData && formData.id && (
-                        <Button onClick={handleUpdate}>Update</Button>
+                        <Button onClick={handleSave}>Update</Button>
                     )}
                 </div>
             </div>
