@@ -9,7 +9,6 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
 } from "../components/ui/select";
@@ -132,7 +131,7 @@ const ProgramsDashboard = () => {
     };
 
     return (
-        <div className="min-h-screen p-6 bg-gray-100">
+        <div className="min-h-screen p-6 light:bg-gray-100">
             <div className="mx-auto space-y-6 max-w-7xl">
                 <div className="flex items-center justify-between">
                     <Input
@@ -143,7 +142,7 @@ const ProgramsDashboard = () => {
                         className="max-w-xs"
                     />
                     <div className="flex items-center space-x-4">
-                        <label className="text-gray-700">
+                        <label className="light:text-gray-700">
                             Filter by Domain:
                         </label>
                         <Select
@@ -158,8 +157,13 @@ const ProgramsDashboard = () => {
 
                             <SelectContent>
                                 <SelectGroup>
-                                    <SelectLabel>Select Domain</SelectLabel>
-                                    <SelectItem value={null}>All</SelectItem>
+                                    {/* <SelectLabel>Select Domain</SelectLabel> */}
+                                    <SelectItem
+                                        value={null}
+                                        className="font-semibold"
+                                    >
+                                        All
+                                    </SelectItem>
                                     {availableDomains.map((domain, Index) => (
                                         <SelectItem key={Index} value={domain}>
                                             {domain}
@@ -174,13 +178,13 @@ const ProgramsDashboard = () => {
                             {
                                 <Button
                                     variant="outline"
-                                    className="text-white bg-blue-600 hover:bg-blue-700"
+                                    className="text-white bg-blue-600 hover:bg-blue-700 hover:text-black"
                                 >
                                     Add Program
                                 </Button>
                             }
                         </DialogTrigger>
-                        <DialogContent className="max-w-[425px] w-full max-h-[calc(100vh-100px)] h-full overflow-hidden p-6 bg-white rounded-lg shadow-lg">
+                        <DialogContent className="max-w-[425px] w-full max-h-[calc(100vh-100px)] h-full overflow-hidden p-6 light:bg-white rounded-lg shadow-lg">
                             <DialogHeader>
                                 <DialogTitle className="text-2xl">
                                     Program Form
@@ -201,7 +205,7 @@ const ProgramsDashboard = () => {
                         </DialogContent>
                     </Dialog>
                 </div>
-                <div className="p-6 bg-white rounded-lg shadow-lg">
+                <div className="p-6 rounded-lg shadow-lg light:bg-white">
                     <ProgramList
                         programs={filteredPrograms}
                         onSelectProgram={handleSelectProgram}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthModal from "../modals/AuthModal";
 import { Button } from "./ui/button";
+import { ModeToggle } from "./mode-toggle";
 // import { SheetDemo } from "./Sheet";
 
 const Header = () => {
@@ -37,11 +38,12 @@ const Header = () => {
                 </div>
                 <div className="flex space-x-4">
                     {isAuth ? (
-                        <div className="space-x-4">
+                        <div className="flex gap-4">
                             <Button onClick={() => navigate("/program")}>
                                 Dashboard
                             </Button>
                             <Button onClick={handleLogout}>Logout</Button>
+                            <ModeToggle />
                         </div>
                     ) : (
                         <div>
@@ -58,6 +60,7 @@ const Header = () => {
                                 <Button className="max-md:hidden">
                                     Contact Us
                                 </Button>
+                                <ModeToggle />
                             </div>
                             <AuthModal
                                 isAuthModalOpen={isAuthModalOpen}
