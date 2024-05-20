@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import ProgramList from "../components/ProgramList";
 import ProgramForm from "../components/ProgramForm";
 import programApi from "../api/programApi";
-import ProgramDetails from "../components/ProgramDetails";
 import { useUserContext } from "../UserContext";
 import { Input } from "../components/ui/input";
 import {
@@ -149,16 +148,20 @@ const ProgramsDashboard = () => {
                         </label>
                         <Select
                             value={selectedDomain}
-                            onChange={(e) => handleDomainFilter(e.target.value)}
+                            onValueChange={(value) => {
+                                handleDomainFilter(value);
+                            }}
                         >
                             <SelectTrigger className="w-[180px]">
                                 <SelectValue placeholder="All Domains" />
                             </SelectTrigger>
+
                             <SelectContent>
                                 <SelectGroup>
                                     <SelectLabel>Select Domain</SelectLabel>
-                                    {availableDomains.map((domain) => (
-                                        <SelectItem key={domain} value={domain}>
+                                    <SelectItem value={null}>All</SelectItem>
+                                    {availableDomains.map((domain, Index) => (
+                                        <SelectItem key={Index} value={domain}>
                                             {domain}
                                         </SelectItem>
                                     ))}
@@ -166,14 +169,16 @@ const ProgramsDashboard = () => {
                             </SelectContent>
                         </Select>
                     </div>
-                    <Dialog>
+                    <Dialog onOpenChange={handleEdit}>
                         <DialogTrigger asChild>
-                            <Button
-                                variant="outline"
-                                className="text-white bg-blue-600 hover:bg-blue-700"
-                            >
-                                Add Program
-                            </Button>
+                            {
+                                <Button
+                                    variant="outline"
+                                    className="text-white bg-blue-600 hover:bg-blue-700"
+                                >
+                                    Add Program
+                                </Button>
+                            }
                         </DialogTrigger>
                         <DialogContent className="max-w-[425px] w-full max-h-[calc(100vh-100px)] h-full overflow-hidden p-6 bg-white rounded-lg shadow-lg">
                             <DialogHeader>

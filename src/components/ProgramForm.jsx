@@ -49,7 +49,7 @@ const ProgramForm = ({
 
     return (
         <ScrollArea className="w-full h-full">
-            <div className="w-full pl-2 pr-6 space-y-2">
+            <div className="w-full pb-2 pl-2 pr-6 space-y-2">
                 <Label>Program Name:</Label>
                 <Input
                     type="text"
@@ -81,7 +81,7 @@ const ProgramForm = ({
                 <Input
                     type="text"
                     value={ownerUsername || user.username}
-                    disabled // Disable editing
+                    disabled // Disable editing the username
                 />
 
                 <Label>Mode:</Label>
@@ -239,10 +239,13 @@ const ProgramForm = ({
                     }
                 ></Textarea>
                 <div className="flex space-x-2">
-                    <Button onClick={handleSave}>Save</Button>
-                    <Button onClick={handleDelete}>Delete</Button>
-                    {formData && formData.id && (
-                        <Button onClick={handleSave}>Update</Button>
+                    {formData && formData.id ? (
+                        <div className="space-x-2">
+                            <Button onClick={handleSave}>Update</Button>
+                            <Button onClick={handleDelete}>Delete</Button>
+                        </div>
+                    ) : (
+                        <Button onClick={handleSave}>Save</Button>
                     )}
                 </div>
             </div>
