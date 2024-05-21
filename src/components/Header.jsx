@@ -16,7 +16,7 @@ const Header = () => {
 
     const handleLogout = async () => {
         try {
-            await fetch("http://localhost:3000/api/users/logout", {
+            await fetch("https://hero-backend-knh4.onrender.com", {
                 method: "GET",
                 credentials: "include",
             });

@@ -26,7 +26,7 @@ const Login = ({ handleAuthModal, handleAuth }) => {
     const onSubmit = async (data) => {
         try {
             const response = await fetch(
-                "http://localhost:3000/api/users/login",
+                "https://hero-backend-knh4.onrender.com",
                 {
                     method: "POST",
                     credentials: "include",
