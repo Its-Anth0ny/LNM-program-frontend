@@ -14,6 +14,7 @@ import {
 } from "../components/ui/select";
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogHeader,
@@ -21,6 +22,7 @@ import {
     DialogTrigger,
 } from "../components/ui/dialog";
 import { Button } from "../components/ui/button";
+import { TypeAnimation } from "react-type-animation";
 
 const ProgramsDashboard = () => {
     const [programs, setPrograms] = useState([]);
@@ -134,76 +136,94 @@ const ProgramsDashboard = () => {
         <div className="min-h-screen p-6 light:bg-gray-100">
             <div className="mx-auto space-y-6 max-w-7xl">
                 <div className="flex items-center justify-between">
-                    <Input
-                        type="text"
-                        placeholder="Search by name..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="max-w-xs"
-                    />
-                    <div className="flex items-center space-x-4">
-                        <label className="light:text-gray-700">
-                            Filter by Domain:
-                        </label>
-                        <Select
-                            value={selectedDomain}
-                            onValueChange={(value) => {
-                                handleDomainFilter(value);
-                            }}
-                        >
-                            <SelectTrigger className="w-[180px]">
-                                <SelectValue placeholder="All Domains" />
-                            </SelectTrigger>
+                    <h1 className="text-2xl font-semibold text-gray-900">
+                        <TypeAnimation
+                            sequence={[
+                                // Same substring at the start will only be typed out once, initially
+                                `Welcome, ${
+                                    user?.username.toUpperCase() || "User"
+                                }`,
+                                1000,
+                            ]}
+                            speed={1}
+                            cursor={false}
+                        />
+                    </h1>
+                    <div className="flex items-center space-x-6">
+                        <Input
+                            type="text"
+                            placeholder="Search by name..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className="w-[250px]"
+                        />
+                        <div className="flex items-center space-x-4">
+                            {/* <label className="light:text-gray-700">
+                                Filter by Domain:
+                            </label> */}
+                            <Select
+                                value={selectedDomain}
+                                onValueChange={(value) => {
+                                    handleDomainFilter(value);
+                                }}
+                            >
+                                <SelectTrigger className="w-[180px]">
+                                    <SelectValue placeholder="All Domains" />
+                                </SelectTrigger>
 
-                            <SelectContent>
-                                <SelectGroup>
-                                    {/* <SelectLabel>Select Domain</SelectLabel> */}
-                                    <SelectItem
-                                        value={null}
-                                        className="font-semibold"
-                                    >
-                                        All
-                                    </SelectItem>
-                                    {availableDomains.map((domain, Index) => (
-                                        <SelectItem key={Index} value={domain}>
-                                            {domain}
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem
+                                            value={null}
+                                            className="font-semibold"
+                                        >
+                                            All
                                         </SelectItem>
-                                    ))}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
-                    </div>
-                    <Dialog onOpenChange={handleEdit}>
-                        <DialogTrigger asChild>
-                            {
+                                        {availableDomains.map(
+                                            (domain, index) => (
+                                                <SelectItem
+                                                    key={index}
+                                                    value={domain}
+                                                >
+                                                    {domain}
+                                                </SelectItem>
+                                            )
+                                        )}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        <Dialog onOpenChange={handleEdit}>
+                            <DialogTrigger asChild>
                                 <Button
                                     variant="outline"
-                                    className="text-white bg-blue-600 hover:bg-blue-700 hover:text-black"
+                                    className="text-white bg-blue-600 hover:bg-blue-700"
                                 >
                                     Add Program
                                 </Button>
-                            }
-                        </DialogTrigger>
-                        <DialogContent className="max-w-[425px] w-full max-h-[calc(100vh-100px)] h-full overflow-hidden p-6 light:bg-white rounded-lg shadow-lg">
-                            <DialogHeader>
-                                <DialogTitle className="text-2xl">
-                                    Program Form
-                                </DialogTitle>
-                                <DialogDescription>
-                                    Add the program details below.
-                                </DialogDescription>
-                            </DialogHeader>
-                            <ProgramForm
-                                program={selectedProgram}
-                                onCreateProgram={handleCreateProgram}
-                                onUpdateProgram={handleUpdateProgram}
-                                onDeleteProgram={handleDeleteProgram}
-                                availableDomains={availableDomains}
-                                ownerUsername={user?.username}
-                                isEditMode={isEditing}
-                            />
-                        </DialogContent>
-                    </Dialog>
+                            </DialogTrigger>
+                            <DialogContent className="max-w-[425px] w-full max-h-[calc(100vh-100px)] h-full overflow-hidden p-6 light:bg-white rounded-lg shadow-lg">
+                                <DialogHeader>
+                                    <DialogTitle className="text-2xl">
+                                        Program Form
+                                    </DialogTitle>
+                                    <DialogDescription>
+                                        Add the program details below.
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <ProgramForm
+                                    program={selectedProgram}
+                                    onCreateProgram={handleCreateProgram}
+                                    onUpdateProgram={handleUpdateProgram}
+                                    onDeleteProgram={handleDeleteProgram}
+                                    availableDomains={availableDomains}
+                                    ownerUsername={user?.username}
+                                    isEditMode={isEditing}
+                                />
+                            </DialogContent>
+                            <DialogClose asChild accessKey=""></DialogClose>
+                        </Dialog>
+                    </div>
                 </div>
                 <div className="p-6 rounded-lg shadow-lg light:bg-white">
                     <ProgramList

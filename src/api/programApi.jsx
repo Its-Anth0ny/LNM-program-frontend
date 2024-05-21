@@ -1,5 +1,4 @@
-const BASE_URL = "https://hero-backend-knh4.onrender.com"; // Replace with your backend URL
-
+import { BASE_URL } from "../utils/apiConstants";
 const programApi = {
     // Fetch all programs from the backend
     getAllPrograms: async (searchTerm) => {

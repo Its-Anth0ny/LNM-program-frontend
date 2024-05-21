@@ -20,9 +20,11 @@ import {
 } from "./ui/form";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { Toast } from "./ui/toast";
 import { useUserContext } from "../UserContext";
-import { toast } from "./ui/use-toast";
+import { BASE_URL } from "../utils/apiConstants";
+
+// import { Toast } from "./ui/toast";
+
 // import { zodResolver } from "@hookform/resolvers/zod";
 // import { z } from "zod";
 
@@ -44,17 +46,14 @@ const Signup = ({ handleAuthModal, handleAuth }) => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await fetch(
-                "https://hero-backend-knh4.onrender.com",
-                {
-                    method: "POST",
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                }
-            );
+            const response = await fetch(`${BASE_URL}/api/users/signup`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
 
             if (response.status === 409) {
                 // Signup failed due to conflict (e.g., duplicate email or username)

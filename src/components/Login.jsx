@@ -12,6 +12,7 @@ import {
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { useForm } from "react-hook-form";
+import { BASE_URL } from "../utils/apiConstants";
 
 const Login = ({ handleAuthModal, handleAuth }) => {
     const {
@@ -25,17 +26,14 @@ const Login = ({ handleAuthModal, handleAuth }) => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await fetch(
-                "https://hero-backend-knh4.onrender.com",
-                {
-                    method: "POST",
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                }
-            );
+            const response = await fetch(`${BASE_URL}/api/users/login`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            });
             if (response.ok) {
                 const userData = await response.json();
                 login(userData.username);

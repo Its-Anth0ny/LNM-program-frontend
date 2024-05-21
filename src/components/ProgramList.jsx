@@ -74,7 +74,6 @@ const ProgramList = ({
                                                 <DialogTitle className="text-2xl">
                                                     Program Details
                                                 </DialogTitle>
-
                                                 <DialogDescription></DialogDescription>
                                             </DialogHeader>
                                             <hr className="border-gray-300 mr-[5px]" />
