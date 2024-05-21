@@ -136,7 +136,7 @@ const ProgramsDashboard = () => {
         <div className="min-h-screen p-6 light:bg-gray-100">
             <div className="mx-auto space-y-6 max-w-7xl">
                 <div className="flex items-center justify-between">
-                    <h1 className="text-2xl font-semibold text-gray-900">
+                    <h1 className="text-2xl font-semibold light:text-gray-900">
                         <TypeAnimation
                             sequence={[
                                 // Same substring at the start will only be typed out once, initially
